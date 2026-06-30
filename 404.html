@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jarak — جارك</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+           font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:#FAF4EC; color:#2B2018; }
+    .card { text-align:center; padding:28px 22px; max-width:380px; }
+    h1 { font-size:26px; margin:8px 0 4px; }
+    p { color:#6B5847; line-height:1.6; }
+    .btns { display:flex; flex-direction:column; gap:12px; margin-top:18px; }
+    a.btn { display:block; padding:14px 18px; border-radius:14px; text-decoration:none; font-weight:700;
+            background:#B07D22; color:#fff; }
+    a.btn.alt { background:#fff; color:#6B4E12; border:1px solid #DCCFB6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Jarak · جارك</h1>
+    <p>افتح هذا الرابط داخل تطبيق Jarak. إن لم يكن مثبّتاً على جهازك، نزّله من المتجر:</p>
+    <div class="btns">
+      <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.binaref.jarak">تنزيل من Google Play</a>
+      <a class="btn alt" id="ios" href="#">تنزيل من App Store</a>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var ua = navigator.userAgent || navigator.vendor || '';
+      var isAndroid = /android/i.test(ua);
+      var isIOS = /iphone|ipad|ipod/i.test(ua);
+      var play = 'https://play.google.com/store/apps/details?id=com.binaref.jarak';
+      var appStore = '#'; // TODO: replace with the App Store URL after the iOS release
+      if (appStore === '#') { document.getElementById('ios').style.display = 'none'; }
+      // The app (when installed) intercepts the link via App Links / Universal Links,
+      // so reaching this page means it is not installed — send the user to the store.
+      if (isAndroid) { location.replace(play); }
+      else if (isIOS && appStore !== '#') { location.replace(appStore); }
+    })();
+  </script>
+</body>
+</html>
